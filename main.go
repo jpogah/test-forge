@@ -8,9 +8,11 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello from Forge")
+		if r.Method == http.MethodGet {
+			fmt.Fprint(w, "Hello from Forge")
+		}
 	})
 
-	log.Println("Server starting on :8080")
+	log.Println("Server listening on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
